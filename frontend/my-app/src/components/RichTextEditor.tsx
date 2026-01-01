@@ -20,9 +20,12 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       try {
         // First try: @ckeditor/ckeditor5-build-classic
         const classicBuild = await import('@ckeditor/ckeditor5-build-classic')
-        setEditor(() => classicBuild.default)
+        // Handle both default export and named export
+        const EditorClass = classicBuild.default || classicBuild.ClassicEditor || classicBuild
+        setEditor(() => EditorClass)
         setIsLoading(false)
-      } catch {
+      } catch (err1) {
+        console.warn('Failed to load @ckeditor/ckeditor5-build-classic, trying alternative:', err1)
         try {
           // Second try: Create a minimal editor from ckeditor5 package
           const ckeditor5 = await import('ckeditor5')

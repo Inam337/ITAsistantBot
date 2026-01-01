@@ -13,11 +13,119 @@ interface SolutionDetailProps {
 export const SolutionDetail = ({ solution, isCustom, onEdit, onDelete }: SolutionDetailProps) => {
   const navigate = useNavigate()
 
-  const parts = solution.description.split(/\d+\)\s*/)
-  const steps = parts.filter(part => part.trim().length > 0)
+  // Check if description contains HTML tags (from CKEditor)
+  const isHTML = /<[a-z][\s\S]*>/i.test(solution.description)
+  
+  // Parse steps - handle both HTML and plain text formats
+  let steps: string[] = []
+  if (isHTML) {
+    // For HTML content, extract list items or numbered items
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = solution.description
+    
+    // Try to find ordered list items
+    const listItems = tempDiv.querySelectorAll('ol li, ul li')
+    if (listItems.length > 0) {
+      steps = Array.from(listItems).map(li => li.innerHTML.trim()).filter(s => s.length > 0)
+    } else {
+      // Fallback: split by numbered patterns in HTML
+      const htmlContent = solution.description
+      const parts = htmlContent.split(/(?:<p[^>]*>)?\s*(?:\d+[.)]\s*|<\/p>)/i)
+      steps = parts.filter(part => {
+        const cleaned = part.replace(/<[^>]*>/g, '').trim()
+        return cleaned.length > 0
+      })
+    }
+    
+    // If still no steps, use the full HTML content
+    if (steps.length === 0) {
+      steps = [solution.description]
+    }
+  } else {
+    // Plain text format
+    const parts = solution.description.split(/\d+\)\s*/)
+    steps = parts.filter(part => part.trim().length > 0)
+  }
 
   return (
     <div className={`min-h-screen ${COLOR_CLASSES.bgGradient} animate-fadeIn pt-16`}>
+      <style>{`
+        .ck-content {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #374151;
+        }
+        .ck-content p {
+          margin: 0.5em 0;
+        }
+        .ck-content p:first-child {
+          margin-top: 0;
+        }
+        .ck-content p:last-child {
+          margin-bottom: 0;
+        }
+        .ck-content ul,
+        .ck-content ol {
+          margin: 0.5em 0;
+          padding-left: 1.5em;
+        }
+        .ck-content li {
+          margin: 0.25em 0;
+        }
+        .ck-content strong,
+        .ck-content b {
+          font-weight: 600;
+          color: #7e22ce;
+        }
+        .ck-content em,
+        .ck-content i {
+          font-style: italic;
+        }
+        .ck-content a {
+          color: #9333ea;
+          text-decoration: underline;
+        }
+        .ck-content a:hover {
+          color: #7e22ce;
+        }
+        .ck-content h1,
+        .ck-content h2,
+        .ck-content h3 {
+          font-weight: 600;
+          margin: 0.75em 0 0.5em 0;
+          color: #581c87;
+        }
+        .ck-content h1 {
+          font-size: 1.5em;
+        }
+        .ck-content h2 {
+          font-size: 1.25em;
+        }
+        .ck-content h3 {
+          font-size: 1.1em;
+        }
+        .ck-content blockquote {
+          border-left: 3px solid #c084fc;
+          padding-left: 1em;
+          margin: 0.5em 0;
+          font-style: italic;
+          color: #6b7280;
+        }
+        .ck-content table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 0.5em 0;
+        }
+        .ck-content table td,
+        .ck-content table th {
+          border: 1px solid #e5e7eb;
+          padding: 0.5em;
+        }
+        .ck-content table th {
+          background-color: #f3f4f6;
+          font-weight: 600;
+        }
+      `}</style>
       <div className="container mx-auto px-4 py-4 max-w-6xl">
        
 
@@ -79,9 +187,10 @@ export const SolutionDetail = ({ solution, isCustom, onEdit, onDelete }: Solutio
                     <div className={`flex-shrink-0 w-6 h-6 bg-gradient-to-br ${GRADIENTS.step} text-white rounded-full flex items-center justify-center font-semibold text-xs shadow-md`}>
                       {index + 1}
                     </div>
-                    <p className={`${COLOR_CLASSES.textPrimary} text-xs leading-relaxed flex-1 pt-0.5`}>
-                      {step.trim()}
-                    </p>
+                    <div 
+                      className={`${COLOR_CLASSES.textPrimary} text-xs leading-relaxed flex-1 pt-0.5 ck-content`}
+                      dangerouslySetInnerHTML={{ __html: step.trim() }}
+                    />
                   </div>
                 ))}
               </div>

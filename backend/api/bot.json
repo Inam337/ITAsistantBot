@@ -58,17 +58,6 @@
     }
   },
   {
-    "title": "dsdsd",
-    "problem_statement": "sdsd",
-    "description": "dsdsd",
-    "action": {
-      "trigger": [
-        "dsds"
-      ],
-      "next_step": "dsdsds"
-    }
-  },
-  {
     "title": "wrrwwwewtwtwtw",
     "problem_statement": "wtwttwtwwt",
     "description": "twewtetwtwwttwtwewte",
@@ -102,36 +91,17 @@
     }
   },
   {
-    "title": "test",
-    "problem_statement": "test",
-    "description": "testtesttest",
+    "title": "fsf",
+    "problem_statement": "fsfsfs",
+    "description": "<ol><li><strong>Generate code from selected frames</strong>: Select a Figma frame and turn it into code. Great for product teams building new flows or iterating on app features.</li><li><strong>Extract design context</strong>: Pull in variables, components, and layout data directly into your IDE. This is especially useful for design systems and component-based workflows.</li><li><strong>Retrieve Make resources</strong>: <a href=\"https://developers.figma.com/docs/figma-mcp-server/bringing-make-context-to-your-agent/\" target=\"_blank\" rel=\"noopener noreferrer\">Gather code resources from Make files</a> and provide them to the LLM as context. This can help as you move from prototype to production application.</li><li><strong>Keep your design system components consistent with Code Connect</strong>: Boost output quality by reusing your actual components. Code Connect keeps your generated code consistent with your codebase.</li></ol>",
     "action": {
       "trigger": [
-        "test"
+        "sffs",
+        "fd",
+        "f",
+        "fd\\"
       ],
-      "next_step": "testtesttest"
-    }
-  },
-  {
-    "title": "dsdsd",
-    "problem_statement": "sdsdsds",
-    "description": "<p>dsdsdsds</p>",
-    "action": {
-      "trigger": [
-        "dsdsdsdsddsdssdds"
-      ],
-      "next_step": "dsdsdsd"
-    }
-  },
-  {
-    "title": "dsjssd",
-    "problem_statement": "gdgdgd",
-    "description": "<p>gdgd</p>",
-    "action": {
-      "trigger": [
-        "gdgd"
-      ],
-      "next_step": "fdfd"
+      "next_step": "ewsdssd"
     }
   }
 ]
