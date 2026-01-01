@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Display not showing or extending in Teams meeting",
+    "problem_statement": "User is in a meeting or conference and the external screen, projector, or extended display is not showing correctly during a Microsoft Teams meeting.",
+    "description": "1) Press Windows + P. 2) Select \"Duplicate\" for the same screen or \"Extend\" for extended display. 3) Unplug and re-plug the HDMI or USB-C cable once. 4) Go to Settings → System → Display → Click \"Detect\". 5) Confirm the screen is visible in Teams.",
+    "action": {
+      "trigger": [
+        "meeting",
+        "conference",
+        "teams meeting",
+        "screen not showing",
+        "display issue",
+        "extended display",
+        "projector",
+        "hdmi"
+      ],
+      "next_step": "Check if the external screen or projector is now visible and correctly displaying in the Teams meeting."
+    }
+  },
+  {
+    "title": "Audio not working in Teams meeting",
+    "problem_statement": "User is unable to hear sound or audio is coming from the wrong device during a Microsoft Teams meeting.",
+    "description": "1) Click the speaker icon in the taskbar. 2) Open Sound settings. 3) Set Output device to \"Jabra\" or \"Polycom\". 4) Open Microsoft Teams → Settings → Devices. 5) Select the same speaker and microphone.",
+    "action": {
+      "trigger": [
+        "sound not working",
+        "no audio",
+        "cannot hear",
+        "speaker issue",
+        "audio issue",
+        "jabra",
+        "polycom",
+        "teams sound problem"
+      ],
+      "next_step": "Play a test sound or ask someone in the meeting to confirm audio is working."
+    }
+  }
+]
+
